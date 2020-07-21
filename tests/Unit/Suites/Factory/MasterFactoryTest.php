@@ -25,24 +25,13 @@ class MasterFactoryTest extends TestCase
      */
     private $dummyFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dummyMasterFactory = new class() implements MasterFactory {
             use MasterFactoryTrait;
         };
         $this->dummyFactory = new StubFactory;
         $this->dummyMasterFactory->register($this->dummyFactory);
-    }
-
-    public function testMasterFactoryIsSetOnChildFactory()
-    {
-        $this->assertAttributeEquals($this->dummyMasterFactory, 'masterFactory', $this->dummyFactory);
-    }
-
-    public function testOnlyPublicFactoryMethodsStartingWithGetOrCreateAreRegisteredOnMasterFactory()
-    {
-        $expectedMethods = ['createSomething' => $this->dummyFactory, 'getSomething' => $this->dummyFactory];
-        $this->assertAttributeSame($expectedMethods, 'methods', $this->dummyMasterFactory);
     }
 
     public function testExceptionIsThrownDuringAttemptToCallNotRegisteredFactoryMethod()
