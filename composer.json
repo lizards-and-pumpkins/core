@@ -20,6 +20,7 @@
     "lizards-and-pumpkins/coding-standards": "dev-master"
   },
   "autoload" : {
+    "files" : ["src/Util/functions.php"],
     "psr-4": { "LizardsAndPumpkins\\Core\\": "src/" }
   },
   "scripts": {
