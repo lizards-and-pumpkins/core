@@ -6,9 +6,5 @@ namespace LizardsAndPumpkins\Core\Factory;
 
 interface Factory
 {
-    /**
-     * @param MasterFactory $masterFactory
-     * @return mixed
-     */
-    public function setMasterFactory(MasterFactory $masterFactory);
+    public function setMasterFactory(MasterFactory $masterFactory): void;
 }

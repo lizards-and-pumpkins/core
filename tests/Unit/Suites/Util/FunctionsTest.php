@@ -19,7 +19,7 @@ class FunctionsTest extends TestCase
      * @param mixed $value
      * @param string|int $index
      */
-    public static function notifyCallback($value, $index)
+    public static function notifyCallback($value, $index): void
     {
         self::$callbackArguments[] = [$index, $value];
     }
@@ -37,12 +37,12 @@ class FunctionsTest extends TestCase
         return self::$callbackArguments;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         self::$callbackArguments = [];
     }
 
-    public function testEveryItemAndIndexIsPassedToTheCallback()
+    public function testEveryItemAndIndexIsPassedToTheCallback(): void
     {
         $sourceItems = [
             new \stdClass(),
@@ -55,7 +55,7 @@ class FunctionsTest extends TestCase
         $this->assertSame($receivedArguments, $sourceItems);
     }
 
-    public function testEveryWorksWithStringArrayIndexes()
+    public function testEveryWorksWithStringArrayIndexes(): void
     {
         $items = ['foo' => 'bar', 'baz' => 'qux'];
         $receivedIndexes = [];
@@ -65,7 +65,7 @@ class FunctionsTest extends TestCase
         $this->assertSame(array_keys($items), $receivedIndexes);
     }
 
-    public function testEveryWorksWithTraversable()
+    public function testEveryWorksWithTraversable(): void
     {
         $array = ['foo', 'bar', 'baz'];
         $items = new \ArrayIterator($array);
@@ -76,14 +76,14 @@ class FunctionsTest extends TestCase
         $this->assertSame($array, $receivedArguments);
     }
 
-    public function testEveryWorksWithStringCallbacks()
+    public function testEveryWorksWithStringCallbacks(): void
     {
         $items = [111];
         every($items, '\LizardsAndPumpkins\Util\callback_function');
         $this->assertSame([[0, 111]], $this->getReceivedCallbackArguments());
     }
 
-    public function testEveryWorksWithArrayCallbacks()
+    public function testEveryWorksWithArrayCallbacks(): void
     {
         $items = [222];
         every($items, [self::class, 'notifyCallback']);
@@ -95,7 +95,7 @@ class FunctionsTest extends TestCase
      * @param string $expected
      * @dataProvider typeofDataProvider
      */
-    public function testTypeofReturnsExpectedStringRepresentationOfType($value, string $expected)
+    public function testTypeofReturnsExpectedStringRepresentationOfType($value, string $expected): void
     {
         $this->assertSame($expected, typeof($value));
     }
@@ -116,19 +116,19 @@ class FunctionsTest extends TestCase
         ];
     }
 
-    public function testPipelineSingleFunction()
+    public function testPipelineSingleFunction(): void
     {
         $this->assertSame('FOO BAR', pipeline('strtoupper')('foo bar'));
     }
     
-    public function testPipelineCallsFunctionsLeftToRight()
+    public function testPipelineCallsFunctionsLeftToRight(): void
     {
         $r = pipeline('strtolower', 'ucwords', function ($str) { return explode(' ', $str); }, 'array_reverse');
         $this->assertTrue(is_callable($r));
         $this->assertSame(['Bar', 'Foo'], $r('fOO BaR'));
     }
 
-    public function testPipelineAcceptsDifferentCallables()
+    public function testPipelineAcceptsDifferentCallables(): void
     {
         $inc = new class {
             public function __invoke($arg)
@@ -140,7 +140,7 @@ class FunctionsTest extends TestCase
         $this->assertSame(166, $r());
     }
 
-    public function testPipelineResultWithArrayMap()
+    public function testPipelineResultWithArrayMap(): void
     {
         $input = ['foo', 'barr', 'ba', 'qux'];
         $expected = ['1.51.5', '22', '11', '1.51.5'];

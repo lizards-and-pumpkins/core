@@ -23,6 +23,13 @@
     "files" : ["src/Util/functions.php"],
     "psr-4": { "LizardsAndPumpkins\\Core\\": "src/" }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "LizardsAndPumpkins\\Core\\": [
+        "tests/Unit/Suites"
+      ]
+    }
+  },
   "scripts": {
     "test": "vendor/bin/phpunit -c tests/Unit/phpunit.xml.dist",
     "sniff": "vendor/bin/phpcs --runtime-set ignore_warnings_on_exit true --runtime-set ignore_errors_on_exit true -p --colors --encoding=utf-8 --standard=vendor/lizards-and-pumpkins/coding-standards/src/LizardsAndPumpkins/ src/ tests/"
