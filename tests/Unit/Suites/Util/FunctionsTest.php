@@ -115,40 +115,6 @@ class FunctionsTest extends TestCase
             [$this, get_class($this)],
         ];
     }
-
-    public function testPipelineSingleFunction(): void
-    {
-        $this->assertSame('FOO BAR', pipeline('strtoupper')('foo bar'));
-    }
-    
-    public function testPipelineCallsFunctionsLeftToRight(): void
-    {
-        $r = pipeline('strtolower', 'ucwords', function ($str) { return explode(' ', $str); }, 'array_reverse');
-        $this->assertTrue(is_callable($r));
-        $this->assertSame(['Bar', 'Foo'], $r('fOO BaR'));
-    }
-
-    public function testPipelineAcceptsDifferentCallables(): void
-    {
-        $inc = new class {
-            public function __invoke($arg)
-            {
-                return $arg + 1;
-            }
-        };
-        $r = pipeline(function () { return range(1, 10); }, 'array_sum', [$this, 'multiplyBy3'], $inc);
-        $this->assertSame(166, $r());
-    }
-
-    public function testPipelineResultWithArrayMap(): void
-    {
-        $input = ['foo', 'barr', 'ba', 'qux'];
-        $expected = ['1.51.5', '22', '11', '1.51.5'];
-        $half = function ($n) { return $n / 2; };
-        $duplicate_str = function ($s) { return str_repeat($s, 2); };
-        
-        $this->assertSame($expected, array_map(pipeline('strlen', $half, 'strval', $duplicate_str), $input));
-    }
 }
 
 /**
