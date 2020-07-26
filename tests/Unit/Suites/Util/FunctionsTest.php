@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \every
  * @covers \typeof
- * @covers \pipeline
  */
 class FunctionsTest extends TestCase
 {

@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \LizardsAndPumpkins\Core\Factory\MasterFactoryTrait
- * @uses   \LizardsAndPumpkins\Core\Factory\StubFactory
  * @uses   \LizardsAndPumpkins\Core\Factory\FactoryTrait
  */
 class MasterFactoryTest extends TestCase
