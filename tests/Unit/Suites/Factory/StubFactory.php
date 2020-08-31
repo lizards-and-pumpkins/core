@@ -6,14 +6,9 @@ namespace LizardsAndPumpkins\Core\Factory;
 
 class StubFactory implements Factory
 {
-    /**
-     * @var MasterFactory
-     */
-    private $masterFactory;
-
     public function setMasterFactory(MasterFactory $masterFactory): void
     {
-        $this->masterFactory = $masterFactory;
+
     }
 
     public function createSomething(string $parameter) : string

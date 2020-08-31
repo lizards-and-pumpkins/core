@@ -19,18 +19,12 @@ class MasterFactoryTest extends TestCase
      */
     private $dummyMasterFactory;
 
-    /**
-     * @var StubFactory
-     */
-    private $dummyFactory;
-
     protected function setUp(): void
     {
         $this->dummyMasterFactory = new class() implements MasterFactory {
             use MasterFactoryTrait;
         };
-        $this->dummyFactory = new StubFactory;
-        $this->dummyMasterFactory->register($this->dummyFactory);
+        $this->dummyMasterFactory->register(new StubFactory);
     }
 
     public function testExceptionIsThrownDuringAttemptToCallNotRegisteredFactoryMethod()
