@@ -28,7 +28,7 @@ trait MasterFactoryTrait
         }
 
         foreach ((new \ReflectionObject($factory))->getMethods() as $method) {
-            $name = $method->getName();
+            $name = $method->name;
 
             if ($method->isProtected() || $method->isPrivate()) {
                 continue;
